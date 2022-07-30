@@ -15,9 +15,9 @@ public class SkillManager {
         if(instance == null){
             instance = new SkillManager();
             //Skills
-            skills.add(new Skill("Acrobatics", 10, 5));
-            skills.add(new Skill("Hardiness", 5, 5));
-            //skills.add(new Skill("", 2, 5));
+            skills.add(new Skill("Acrobatics", 10, 5, skillType.NORMAL));
+            skills.add(new Skill("Hardiness", 5, 5, skillType.ATTRIBUTE));
+            skills.add(new Skill("Toughness", 3, 5, skillType.ATTRIBUTE));
         }
         return instance;
     }

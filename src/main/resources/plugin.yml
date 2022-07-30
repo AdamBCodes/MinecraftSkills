@@ -6,3 +6,11 @@ commands:
   getSkill:
     description: Gets Skill Information
     usage: /<command>
+
+  levelUp:
+    description: Levels Up Skill
+    usage: /<command>
+
+  listSkills:
+    description: Lists All Skills
+    usage: /<command>
