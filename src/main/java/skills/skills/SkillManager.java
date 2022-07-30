@@ -13,8 +13,10 @@ public class SkillManager {
     public static SkillManager getInstance(){
         if(instance == null){
             instance = new SkillManager();
-            skills.add(new Skill("Acrobatics", 10, 20));
-            skills.add(new Skill("Hardiness", 5, 20));
+            //Skills
+            skills.add(new Skill("Acrobatics", 10, 5));
+            skills.add(new Skill("Hardiness", 5, 5));
+            //skills.add(new Skill("", 2, 5));
         }
         return instance;
     }

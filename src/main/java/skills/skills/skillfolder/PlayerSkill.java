@@ -14,6 +14,8 @@ public class PlayerSkill implements Serializable {
     private int current_level;
     private float exp_to_next_level;
 
+    private float base_exp;
+
     private float current_exp;
 
     public PlayerSkill(String name, int maxLevel, float exp, int curLevel){
@@ -21,6 +23,7 @@ public class PlayerSkill implements Serializable {
         max_level = maxLevel;
         exp_to_next_level = exp;
         current_level = curLevel;
+        base_exp = exp;
     }
 
     public String getSkillName() {
@@ -46,8 +49,19 @@ public class PlayerSkill implements Serializable {
     public void setCurrent_level(int newLevel){
         current_level = newLevel;
     }
+    public void LevelUp(){
+        current_level += 1;
+        current_exp = 0;
+    }
     public void setCurrent_exp(float newExp){
         current_exp = newExp;
+    }
+
+    public void setExp_to_next_level(float newExp){
+        exp_to_next_level = newExp;
+    }
+    public void expScale(){
+        exp_to_next_level = Math.round((float) Math.pow(base_exp * current_level, 1.1f));
     }
 
     public ItemStack getSkillInfo(){
