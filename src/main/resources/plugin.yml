@@ -2,3 +2,7 @@ name: Skills
 version: '${project.version}'
 main: skills.skills.Skills
 api-version: 1.19
+commands:
+  getSkill:
+    description: Gets Skill Information
+    usage: /<command>

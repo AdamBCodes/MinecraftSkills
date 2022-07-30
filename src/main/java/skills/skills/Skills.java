@@ -10,7 +10,7 @@ public final class Skills extends JavaPlugin {
         // Plugin startup logic
         el = new EventListener();
         getServer().getPluginManager().registerEvents(el, this);
-        //getCommand("getSkill").setExecutor(new GetSkill());
+        getCommand("getSkill").setExecutor(new GetSkill());
     }
 
     @Override

@@ -5,6 +5,7 @@ import skills.skills.skillfolder.Skill;
 import java.util.ArrayList;
 import java.util.List;
 
+//IDEA: Expand Later so it can be read from config so skills can be added or removed
 public class SkillManager {
 
     private static List<Skill> skills = new ArrayList<>();

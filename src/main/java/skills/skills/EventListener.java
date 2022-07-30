@@ -23,16 +23,15 @@ public class EventListener implements Listener {
     List<Skill> skills = SkillManager.getInstance().getSkills();
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e){
-        List<PlayerSkill> playerSkills = new ArrayList<>();
         System.out.println("Player Joined(Get or Create Initial Skills");
         Player p = e.getPlayer();
         PersistentDataContainer pdata = p.getPersistentDataContainer();
         for(int s = 0; s < skills.size(); s++){
             NamespacedKey key = new NamespacedKey(Skills.getPlugin(Skills.class), skills.get(s).getSkillName());
             PersistentDataContainer container = p.getPersistentDataContainer();
+            //Adds Skills To Player if they dont exist and gives info sheet on skills
             if(!pdata.has(key)) {
                 PlayerSkill skill = new PlayerSkill(skills.get(s).getSkillName(), skills.get(s).getMax_level(), skills.get(s).getExp_to_next_level(), 0);
-                playerSkills.add(skill);
                 container.set(key, new SkillDataType(), skill);
                 p.sendMessage("Added " + skill.getSkillName() + " to Your Skills");
                 p.getInventory().addItem(skill.getSkillInfo());
@@ -45,6 +44,7 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onUse(PlayerInteractEvent e){
+        //Checks if paper has All requirements to use
         if(!e.hasItem()) return;
 
         if(e.getItem().getType() != Material.PAPER) return;
@@ -53,6 +53,7 @@ public class EventListener implements Listener {
 
         if(!e.getItem().getItemMeta().getDisplayName().contains("SkillPaper")) return;
 
+        //Gets information for to get ready to display
         Player player = e.getPlayer();
         PersistentDataContainer container = e.getItem().getItemMeta().getPersistentDataContainer();
         String name = e.getItem().getItemMeta().getDisplayName();
@@ -60,6 +61,7 @@ public class EventListener implements Listener {
         NamespacedKey key = new NamespacedKey(Skills.getPlugin(Skills.class), nameArr[1]);
         PlayerSkill playerInfo = player.getPersistentDataContainer().get(key, new SkillDataType());
 
+        //Displays Information and sets new values
         PlayerSkill info = container.get(key, new SkillDataType());
         if(container.has(key, new SkillDataType())){
             ItemStack item = e.getItem();
@@ -69,7 +71,7 @@ public class EventListener implements Listener {
             info.setExp_to_next_level(playerInfo.getExp_to_next_level());
             im.getPersistentDataContainer().set(key, new SkillDataType(), info);
             item.setItemMeta(im);
-            player.sendMessage(ChatColor.GREEN + info.getSkillName());
+            player.sendMessage(ChatColor.AQUA + info.getSkillName());
             player.sendMessage(ChatColor.GREEN + "Level: " + info.getCurrent_level() + "/" + info.getMax_level());
             player.sendMessage(ChatColor.YELLOW + "Exp: " + info.getCurrent_exp() + "/" + info.getExp_to_next_level());
         }
